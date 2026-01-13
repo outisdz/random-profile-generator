@@ -54,7 +54,6 @@ def parse_arguments() -> argparse.Namespace:
     parser.add_argument(
         '--password-length',
         type=int,
-        default=64,
         help='Password length (requires --with-password)'
     )
 
@@ -137,7 +136,7 @@ def generate_username(length: int) -> str:
     )
 
 
-def generate_password(length: int, with_symbols: bool = True) -> str:
+def generate_password(length: int , with_symbols: bool = True) -> str:
     if length < 4:
         raise ValueError('Password length must be at least 4')
 
@@ -219,7 +218,7 @@ if __name__ == '__main__':
 
     password = (
         generate_password(
-            args.password_length,
+            args.password_length if args.password_length else 64 ,
             with_symbols=args.password_symbols
         )
         if args.with_password
